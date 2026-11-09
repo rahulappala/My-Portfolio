@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Appala | Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Oswald:wght@500;700&display=swap');
+        
+        :root {
+            --bg-color: #050505;
+            --panel-bg: rgba(10, 10, 10, 0.85);
+            --text-main: #f0f0f0;
+            --text-muted: #888888;
+            --neon-gold: #e6b800;
+            --neon-blue: #00f3ff;
+            --border-color: #222222;
+            
+            /* Cyberpunk Grid Background */
+            --grid-bg: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                       linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            line-height: 1.6;
+            display: flex;
+        }
+
+        /* --- LANGUAGE TOGGLE LOGIC --- */
+        body.lang-de .en { display: none !important; }
+        body.lang-en .de { display: none !important; }
+
+        /* LEFT PANE: FIXED VIDEO */
+        .left-pane {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40vw;
+            height: 100vh;
+            background: #000;
+            border-right: 1px solid rgba(230, 184, 0, 0.3);
+            box-shadow: 5px 0 30px rgba(230, 184, 0, 0.15);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center; 
+            filter: contrast(1.05) drop-shadow(0 0 15px rgba(0, 243, 255, 0.2));
+        }
+
+        .video-fade-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .audio-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(5, 5, 5, 0.8);
+            border: 1px solid var(--neon-gold);
+            color: var(--neon-gold);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(230, 184, 0, 0.2);
+            backdrop-filter: blur(5px);
+            white-space: nowrap;
+        }
+
+        .audio-btn:hover {
+            background: var(--neon-gold);
+            color: #000;
+            box-shadow: 0 0 25px rgba(230, 184, 0, 0.5);
+        }
+
+        /* RIGHT PANE: SCROLLING PORTFOLIO */
+        .right-pane {
+            margin-left: 40vw;
+            width: 60vw;
+            min-height: 100vh;
+            background-image: var(--grid-bg);
+            background-size: 40px 40px;
+            background-attachment: fixed;
+            padding: 0 50px 100px 50px;
+            position: relative;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            margin-bottom: 60px;
+        }
+        .logo { 
+            font-weight: bold; 
+            letter-spacing: 2px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid rgba(0, 243, 255, 0.4);
+            color: var(--neon-blue);
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+        .lang-toggle:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+        .status { 
+            color: #4caf50; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+            text-shadow: 0 0 10px #4caf50;
+        }
+        .status::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #4caf50;
+        }
+
+        .hero-text { margin-bottom: 80px; }
+        .hero-text h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        .hero-text h2 {
+            font-size: 1.1rem;
+            color: var(--neon-gold);
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(230, 184, 0, 0.4);
+        }
+
+        /* Terminal Panels */
+        .portfolio-panel {
+            background-color: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-radius: 8px;
+            padding: 50px;
+            margin-bottom: 60px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(80px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .portfolio-panel.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.05), inset 0 0 20px rgba(0, 243, 255, 0.02);
+            border-color: rgba(0, 243, 255, 0.4);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            color: var(--neon-gold);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            line-height: 1;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .panel-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5rem;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(0, 243, 255, 0.5);
+            line-height: 0.8;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+        }
+
+        .panel-content p { font-size: 1.05rem; color: #d1d1d1; line-height: 1.8; }
+
+        /* Timeline & Experience Grid */
+        .timeline-item {
+            border-left: 2px solid var(--neon-blue);
+            padding-left: 25px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            background: var(--bg-color);
+            border: 2px solid var(--neon-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-gold);
+        }
+        .job-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .job-meta {
+            font-size: 0.85rem;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+            font-family: 'Fira Code', monospace;
+        }
+        .job-meta span { color: var(--neon-gold); margin-left: 10px; }
+        .job-desc { list-style: none; }
+        .job-desc li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+        .job-desc li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--neon-gold);
+            font-weight: bold;
+        }
+
+        /* Skills */
+        .skills-category { margin-bottom: 30px; }
+        .skills-category h3 {
+            font-size: 0.9rem;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 6px 15px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+        .skill-tag:hover {
+            border-color: var(--neon-gold);
+            color: var(--neon-gold);
+            box-shadow: 0 0 15px rgba(230, 184, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Stats */
+        .stats-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .stat-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .stat-box:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+            transform: translateY(-5px);
+        }
+        .stat-num {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: var(--neon-gold);
+            margin-bottom: 10px;
+            line-height: 1;
+            text-shadow: 0 0 15px rgba(230, 184, 0, 0.4);
+        }
+        .stat-desc { font-size: 0.75rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+
+        @media (max-width: 1024px) {
+            body { flex-direction: column; }
+            .left-pane { position: relative; width: 100%; height: 70vh; border-right: none; border-bottom: 1px solid rgba(230, 184, 0, 0.3); }
+            .video-container video { object-position: center; }
+            .right-pane { margin-left: 0; width: 100%; padding: 0 20px 50px 20px; }
+            .hero-text h1 { font-size: 3.5rem; }
+            .stats-container { grid-template-columns: 1fr; }
+            .panel-header { flex-direction: column; }
+            .panel-number { position: absolute; top: 20px; right: 20px; font-size: 4rem; }
+        }
+    </style>
+</head>
+<body class="lang-de">
+
+    <div class="left-pane">
+        <div class="video-container">
+            <video id="avatarVideo" autoplay loop playsinline muted>
+                <source src="avatar.mp4" type="video/mp4">
+            </video>
+            <div class="video-fade-bottom"></div>
+        </div>
+        <button class="audio-btn" id="audioToggle" onclick="toggleAudio()">🔊 Ton einschalten</button>
+    </div>
+
+    <div class="right-pane">
+        <nav>
+            <div class="logo">RAHUL APPALA</div>
+            <div class="nav-controls">
+                <button class="lang-toggle" onclick="switchLanguage()">
+                    <span class="de">EN (English)</span>
+                    <span class="en">DE (Deutsch)</span>
+                </button>
+                <div class="status">OPEN TO WORK</div>
+            </div>
+        </nav>
+
+        <div class="hero-text">
+            <h1>Rahul Appala</h1>
+            <h2>
+                <span class="de">SENIOR DATA SPECIALIST • BI-ARCHITEKT</span>
+                <span class="en">SENIOR DATA SPECIALIST • BI ARCHITECT</span>
+            </h2>
+        </div>
+        
+        <!-- Section 01: Profile -->
+        <section id="profile" class="portfolio-panel scroll-reveal">
+            <div class="panel-header">
+                <div class="panel-titles">
+                    <span class="subtitle">ABOUT / PROFILE</span>
+                    <h2 class="title">
+                        <span class="de">Wer Ich Bin</span>
+                        <span class="en">Who I Am</span>
+                    </h2>
+                </div>
+                <div class="panel-number">01</div>
+            </div>
+            <div class="panel-content">
+                <p>
+                    <span class="de">Analytischer Senior Data Specialist und BI-Architekt mit Master-Abschluss in Computational Mechanics. Spezialisiert auf das End-to-End-Design hochskalierbarer Enterprise-BI-Lösungen, relationale Datenmodellierung und ETL-Automatisierung via SQL, Python und Git. Experte für die herstellerunabhängige Orchestrierung komplexer Datenlandschaften (DOMO, Power BI, Tableau) und Cloud-Architekturen (AWS/Azure) zur präzisen Abweichungsanalyse und datengetriebenen Prozessoptimierung.</span>
+                    <span class="en">Analytical Senior Data Specialist and BI Architect with a Master's degree in Computational Mechanics. Specialized in the end-to-end design of highly scalable enterprise BI solutions, relational data modeling, and ETL automation via SQL, Python, and Git. Expert in orchestrating complex data landscapes (DOMO, Power BI, Tableau) and cloud architectures (AWS/Azure) vendor-independently to drive precise variance analysis and data-driven process optimization.</span>
+                </p> 
+            </div>
+        </section>
+
+        <!-- Section 02: Skills -->
+        <section class="portfolio-panel scroll-reveal">
+            <div class="panel-header">
+                <div class="panel-titles">
+                    <span class="subtitle">ABOUT / ARSENAL</span>
+                    <h2 class="title">
+                        <span class="de">Technische Skills</span>
+                        <span class="en">Technical Skills</span>
+                    </h2>
+                </div>
+                <div class="panel-number">02</div>
+            </div>
+            <div class="panel-content">
+                <div class="skills-category">
+                    <h3>
+                        <span class="de">Data Science & Analyse</span>
+                        <span class="en">Data Science & Analytics</span>
+                    </h3> 
+                    <div class="skills-grid">
+                        <span class="skill-tag">SQL</span> <span class="skill-tag">Python</span> <span class="skill-tag">ETL/ELT</span> 
+                        <span class="skill-tag">
+                            <span class="de">Relationale Datenmodelle</span>
+                            <span class="en">Relational Data Models</span>
+                        </span> 
+                        <span class="skill-tag">Data Cleansing</span>
+                    </div>
+                </div>
+                <div class="skills-category">
+                    <h3>BI Tools & Cloud</h3>
+                    <div class="skills-grid">
+                        <span class="skill-tag">Power BI</span> <span class="skill-tag">Tableau</span> <span class="skill-tag">DOMO</span> <span class="skill-tag">Splunk</span> 
+                        <span class="skill-tag">
+                            <span class="de">MS Excel (Experte)</span>
+                            <span class="en">MS Excel (Expert)</span>
+                        </span> 
+                        <span class="skill-tag">Microsoft 365</span> <span class="skill-tag">Power Plattform</span> <span class="skill-tag">Azure</span> <span class="skill-tag">AWS</span> <span class="skill-tag">SharePoint</span>
+                    </div>
+                </div>
+                <div class="skills-category">
+                    <h3>
+                        <span class="de">Projektmanagement</span>
+                        <span class="en">Project Management</span>
+                    </h3> 
+                    <div class="skills-grid">
+                        <span class="skill-tag">Requirements Engineering</span> 
+                        <span class="skill-tag">
+                            <span class="de">Prozessdesign</span>
+                            <span class="en">Process Design</span>
+                        </span> 
+                        <span class="skill-tag">Scrum</span> <span class="skill-tag">Kanban</span> <span class="skill-tag">Jira</span> <span class="skill-tag">Confluence</span>
+                    </div>
+                </div>
+                <div class="skills-category">
+                    <h3>
+                        <span class="de">Fachkompetenzen</span>
+                        <span class="en">Domain Expertise</span>
+                    </h3> 
+                    <div class="skills-grid">
+                        <span class="skill-tag">
+                            <span class="de">Datengetriebene Prozessoptimierung</span>
+                            <span class="en">Data-driven Process Optimization</span>
+                        </span> 
+                        <span class="skill-tag">KPI-Analysen</span> 
+                        <span class="skill-tag">
+                            <span class="de">Finanzdatenkonsolidierung</span>
+                            <span class="en">Financial Data Consolidation</span>
+                        </span> 
+                        <span class="skill-tag">
+                            <span class="de">Budgetierungsmodelle</span>
+                            <span class="en">Budgeting Models</span>
+                        </span> 
+                        <span class="skill-tag">
+                            <span class="de">Dimensionale Datenmodellierung</span>
+                            <span class="en">Dimensional Data Modeling</span>
+                        </span> 
+                    </div>
+                </div>
+                <!-- UPDATED CATEGORY: Additional Qualifications & Languages -->
+                <div class="skills-category">
+                    <h3>
+                        <span class="de">Zusatzqualifikationen & Sprachen</span>
+                        <span class="en">Additional Qualifications & Languages</span>
+                    </h3> 
+                    <div class="skills-grid">
+                        <span class="skill-tag">
+                            <span class="de">Führerschein Klasse B</span>
+                            <span class="en">Driver's License (Class B)</span>
+                        </span>
+                        <span class="skill-tag">
+                            <span class="de">Deutsch (C1)</span>
+                            <span class="en">German (C1)</span>
+                        </span> 
+                        <span class="skill-tag">
+                            <span class="de">Englisch (C1)</span>
+                            <span class="en">English (C1)</span>
+                        </span> 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 03: Experience -->
+        <section class="portfolio-panel scroll-reveal">
+            <div class="panel-header">
+                <div class="panel-titles">
+                    <span class="subtitle">ABOUT / CAREER</span>
+                    <h2 class="title">
+                        <span class="de">Berufserfahrung</span>
+                        <span class="en">Experience</span>
+                    </h2>
+                </div>
+                <div class="panel-number">03</div>
+            </div>
+            <div class="panel-content">
+                
+                <div class="timeline-item">
+                    <div class="job-title">
+                        <span class="de">Technischer Implementierungsberater</span>
+                        <span class="en">Technical Implementation Consultant</span>
+                    </div> 
+                    <div class="job-meta">Arachnys (AML RightSource) <span>[ 07/2025 - 02/2026 ]</span></div>
+                    <ul class="job-desc">
+                        <li>
+                            <span class="de">Strukturierte quantitative Validierung komplexer Projektdaten zur Identifikation von Optimierungsbedarf bei hochvolumigen technologischen Investitionen.</span>
+                            <span class="en">Structured quantitative validation of complex project data to identify optimization needs in high-volume technological investments.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Leitete Teams in 12 externen Klientenprojekten zur termingerechten Bereitstellung geschäftskritischer technischer Analysen für das Management.</span>
+                            <span class="en">Led teams across 12 external client projects to deliver business-critical technical analyses for management on schedule.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Integrierte Power BI, Splunk, Tableau und DOMO via CI/CD-Pipelines nahtlos mit AWS/Azure-Datenbanken für hochskalierbare Enterprise-BI-Architekturen.</span>
+                            <span class="en">Seamlessly integrated Power BI, Splunk, Tableau, and DOMO via CI/CD pipelines with AWS/Azure databases for highly scalable enterprise BI architectures.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Erfolgreiches Erwartungsmanagement und enge Zusammenarbeit mit Senior-Stakeholdern auf Führungsebene zur Absicherung der Projektziele.</span>
+                            <span class="en">Successfully managed expectations and collaborated closely with senior executive stakeholders to secure project goals.</span>
+                        </li> 
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="job-title">
+                        <span class="de">IT-Berater</span>
+                        <span class="en">IT Consultant</span>
+                    </div> 
+                    <div class="job-meta">Passcon GmbH (AML RightSource) <span>[ 01/2022 - 06/2025 ]</span></div>
+                    <ul class="job-desc">
+                        <li>
+                            <span class="de">Konsolidierte hochvolumige Projekt-Budgetdaten für zeitreihenbasierte Planungen; beschleunigte die Abweichungsanalysen um über 90%.</span>
+                            <span class="en">Consolidated high-volume project budget data for time-series-based planning; accelerated variance analysis by over 90%.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Skalierte interaktive Power BI-Dashboards mit über 20 Kern-KPIs zur verlässlichen datengetriebenen Steuerung für multiple Führungsebenen.</span>
+                            <span class="en">Scaled interactive Power BI dashboards with over 20 core KPIs for reliable data-driven management across multiple executive levels.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Automatisierte ETL-Pipelines für hochvolumige Data-Warehouses mittels SQL, Python und Git; reduzierte Report-Laufzeiten von 4 Stunden auf 10 Minuten.</span>
+                            <span class="en">Automated ETL pipelines for high-volume data warehouses using SQL, Python, and Git; reduced report runtimes from 4 hours to 10 minutes.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Leitete Anforderungs-Workshops mit Fachbereichen; übersetzte komplexe Business-Needs in agile BI-Datenmodelle mit 100%iger technischer Implementierungsquote.</span>
+                            <span class="en">Led requirements workshops with business departments; translated complex business needs into agile BI data models with a 100% technical implementation rate.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Mitwirkung bei der Qualitätssicherung, Durchführung von User Acceptance Tests (UAT) und kontinuierlichen Produktverbesserungen.</span>
+                            <span class="en">Contributed to quality assurance, User Acceptance Testing (UAT), and continuous product improvements.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Führte die technische Dokumentation und Teamausbildung zur nachhaltigen Qualitätssicherung für 100% der komplexen Klientenprojekte.</span>
+                            <span class="en">Led technical documentation and team training for sustainable quality assurance across 100% of complex client projects.</span>
+                        </li> 
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="job-title">
+                        <span class="de">Technischer Berater</span>
+                        <span class="en">Technical Consultant</span>
+                    </div> 
+                    <div class="job-meta">SBES Technologies UG <span>[ 10/2021 - 12/2021 ]</span></div>
+                    <ul class="job-desc">
+                        <li>
+                            <span class="de">Unterstützung im Projektmanagement, Reporting und Prozessanalysen.</span>
+                            <span class="en">Supported project management, reporting, and process analysis.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Koordination technischer Abläufe, Projektdokumentation und Durchführung von Software-/Komponententests.</span>
+                            <span class="en">Coordinated technical workflows, project documentation, and conducted software/component testing.</span>
+                        </li> 
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="job-title">CAE-Analyst</div>
+                    <div class="job-meta">Numericx Engineering Services Pvt. Ltd. <span>[ 03/2020 - 02/2021 ]</span></div>
+                    <ul class="job-desc">
+                        <li>
+                            <span class="de">Analyse und Optimierung technischer Konstruktionen in interdisziplinären Teams.</span>
+                            <span class="en">Analyzed and optimized technical designs within interdisciplinary teams.</span>
+                        </li> 
+                        <li>
+                            <span class="de">Erstellung technischer Dokumentationen und Entwicklungsunterlagen.</span>
+                            <span class="en">Created technical documentation and development materials.</span>
+                        </li> 
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="job-title">
+                        <span class="de">Trainee im Ingenieurwesen</span>
+                        <span class="en">Engineering Trainee</span>
+                    </div> 
+                    <div class="job-meta">Neva Impex Pvt. Ltd. <span>[ 05/2013 - 09/2014 ]</span></div>
+                    <ul class="job-desc">
+                        <li>
+                            <span class="de">Entwicklung und Konstruktion von Produkten gemäß Kundenanforderungen und Übergabe an die Montage.</span>
+                            <span class="en">Developed and designed products according to customer requirements and handed over to assembly.</span>
+                        </li> 
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 04: Education -->
+        <section class="portfolio-panel scroll-reveal">
+            <div class="panel-header">
+                <div class="panel-titles">
+                    <span class="subtitle">ABOUT / ACADEMICS</span>
+                    <h2 class="title">
+                        <span class="de">Bildungsweg</span>
+                        <span class="en">Education</span>
+                    </h2>
+                </div>
+                <div class="panel-number">04</div>
+            </div>
+            <div class="panel-content">
+                <div class="timeline-item">
+                    <div class="job-title">Master of Science in Computational Mechanics</div>
+                    <div class="job-meta">
+                        <span class="de">Universität Duisburg-Essen</span>
+                        <span class="en">University of Duisburg-Essen</span>
+                        <span>[ 
+                            <span class="de">Abschluss: 01/2021</span>
+                            <span class="en">Graduated: 01/2021</span>
+                        ]</span>
+                    </div> 
+                </div>
+                <div class="timeline-item">
+                    <div class="job-title">
+                        <span class="de">Bachelor of Technology in Maschinenbau</span>
+                        <span class="en">Bachelor of Technology in Mechanical Engineering</span>
+                    </div> 
+                    <div class="job-meta">
+                        JNTU Kakinada, 
+                        <span class="de">Indien</span>
+                        <span class="en">India</span>
+                        <span>[ 
+                            <span class="de">Abschluss: 05/2013</span>
+                            <span class="en">Graduated: 05/2013</span>
+                        ]</span>
+                    </div> 
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 05: Stats -->
+        <section class="portfolio-panel scroll-reveal">
+            <div class="panel-header">
+                <div class="panel-titles">
+                    <span class="subtitle">ABOUT / IMPACT</span>
+                    <h2 class="title">
+                        <span class="de">In Zahlen</span>
+                        <span class="en">By The Numbers</span>
+                    </h2>
+                </div>
+                <div class="panel-number">05</div>
+            </div>
+            <div class="panel-content">
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-num">90%</div>
+                        <div class="stat-desc">
+                            <span class="de">Schnellere Abweichungsanalysen</span>
+                            <span class="en">Faster Variance Analysis</span>
+                        </div> 
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">10m</div>
+                        <div class="stat-desc">
+                            <span class="de">Report-Laufzeit (von 4 Std)</span>
+                            <span class="en">Report Runtime (from 4 hrs)</span>
+                        </div> 
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">100%</div>
+                        <div class="stat-desc">
+                            <span class="de">Tech-Implementierungsquote</span>
+                            <span class="en">Tech Implementation Rate</span>
+                        </div> 
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">12</div>
+                        <div class="stat-desc">
+                            <span class="de">Externe Klientenprojekte</span>
+                            <span class="en">External Client Projects</span>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // --- Smart Audio Toggle Logic ---
+        function updateAudioButtonText() {
+            const video = document.getElementById('avatarVideo');
+            const btn = document.getElementById('audioToggle');
+            const isEnglish = document.body.classList.contains('lang-en');
+
+            if (video.muted) {
+                btn.innerText = isEnglish ? '🔊 Enable Audio' : '🔊 Ton einschalten';
+                btn.style.background = 'rgba(5, 5, 5, 0.8)';
+                btn.style.color = 'var(--neon-gold)';
+            } else {
+                btn.innerText = isEnglish ? '🔇 Disable Audio' : '🔇 Ton ausschalten';
+                btn.style.background = 'var(--neon-gold)';
+                btn.style.color = '#000';
+            }
+        }
+
+        function toggleAudio() {
+            const video = document.getElementById('avatarVideo');
+            video.muted = !video.muted;
+            updateAudioButtonText();
+        }
+
+        // --- Language Toggle Logic ---
+        function switchLanguage() {
+            const body = document.body;
+            if (body.classList.contains('lang-de')) {
+                body.classList.remove('lang-de');
+                body.classList.add('lang-en');
+                document.documentElement.lang = 'en';
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-de');
+                document.documentElement.lang = 'de';
+            }
+            updateAudioButtonText();
+        }
+
+        // --- Scroll Animation Logic ---
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => { entry.target.classList.add('visible'); }, index * 150);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach((panel) => { observer.observe(panel); });
+    </script>
+</body>
+</html>

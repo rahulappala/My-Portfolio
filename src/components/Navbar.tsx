@@ -3,12 +3,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
+import { useLanguage } from "../context/LanguageContext";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 export let smoother: ScrollSmoother;
 
 const Navbar = () => {
+  const { lang, toggleLang, t } = useLanguage();
+
   useEffect(() => {
     smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
@@ -22,6 +25,7 @@ const Navbar = () => {
 
     smoother.scrollTop(0);
     smoother.paused(true);
+    ScrollTrigger.refresh();
 
     let links = document.querySelectorAll(".header ul a");
     links.forEach((elem) => {
@@ -39,36 +43,60 @@ const Navbar = () => {
       ScrollSmoother.refresh(true);
     });
   }, []);
+
   return (
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          Logo
+          RAHUL APPALA
         </a>
         <a
-          href="mailto:example@mail.com"
+          href="mailto:mail.rahulappala@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
         >
-          example@mail.com
+          mail.rahulappala@gmail.com
         </a>
-        <ul>
-          <li>
-            <a data-href="#about" href="#about">
-              <HoverLinks text="ABOUT" />
-            </a>
-          </li>
-          <li>
-            <a data-href="#work" href="#work">
-              <HoverLinks text="WORK" />
-            </a>
-          </li>
-          <li>
-            <a data-href="#contact" href="#contact">
-              <HoverLinks text="CONTACT" />
-            </a>
-          </li>
-        </ul>
+        <div className="navbar-controls">
+          <ul>
+            <li>
+              <a data-href="#about" href="#about">
+                <HoverLinks text={t.nav.about} />
+              </a>
+            </li>
+            <li>
+              <a data-href="#career" href="#career">
+                <HoverLinks text={t.nav.career} />
+              </a>
+            </li>
+            <li>
+              <a data-href="#work" href="#work">
+                <HoverLinks text={t.nav.work} />
+              </a>
+            </li>
+            <li>
+              <a data-href="#techstack" href="#techstack">
+                <HoverLinks text={t.nav.skills} />
+              </a>
+            </li>
+            <li>
+              <a data-href="#contact" href="#contact">
+                <HoverLinks text={t.nav.contact} />
+              </a>
+            </li>
+          </ul>
+          <button
+            className="lang-toggle-btn"
+            onClick={toggleLang}
+            title={lang === "en" ? "Auf Deutsch umschalten" : "Switch to English"}
+            data-cursor="pointer"
+          >
+            <span className="lang-globe">🌐</span>
+            <span className={`lang-opt ${lang === "en" ? "active" : ""}`}>EN</span>
+            <span className="lang-sep">|</span>
+            <span className={`lang-opt ${lang === "de" ? "active" : ""}`}>DE</span>
+          </button>
+        </div>
       </div>
 
       <div className="landing-circle1"></div>

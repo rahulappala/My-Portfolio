@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import "./styles/WhatIDo.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLanguage } from "../context/LanguageContext";
 
 const WhatIDo = () => {
+  const { t, lang } = useLanguage();
   const containerRef = useRef<(HTMLDivElement | null)[]>([]);
   const setRef = (el: HTMLDivElement | null, index: number) => {
     containerRef.current[index] = el;
@@ -27,10 +29,11 @@ const WhatIDo = () => {
   return (
     <div className="whatIDO">
       <div className="what-box">
-        <h2 className="title">
-          W<span className="hat-h2">HAT</span>
+        <h2 key={`what-title-${lang}`} className="title">
+          {t.whatIDo.title1}
+          <span className="hat-h2">{t.whatIDo.title2.split(" ")[0]}</span>
           <div>
-            I<span className="do-h2"> DO</span>
+            {t.whatIDo.title2.split(" ").slice(1).join(" ")}
           </div>
         </h2>
       </div>
@@ -87,24 +90,21 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>DEVELOP</h3>
-              <h4>Description</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae.
-              </p>
-              <h5>Skillset & tools</h5>
+              <h3>{t.whatIDo.paas.title}</h3>
+              <h4>{t.whatIDo.paas.subtitle}</h4>
+              <p>{t.whatIDo.paas.desc}</p>
+              <h5>{t.whatIDo.skillset}</h5>
               <div className="what-content-flex">
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">Three.js</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Css</div>
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">PHP</div>
-                <div className="what-tags">MySql</div>
+                <div className="what-tags">Jira</div>
+                <div className="what-tags">Jira Service Management</div>
+                <div className="what-tags">Confluence</div>
+                <div className="what-tags">PaaS Platforms</div>
+                <div className="what-tags">Change Management</div>
+                <div className="what-tags">Release Notes</div>
+                <div className="what-tags">UAT Testing</div>
+                <div className="what-tags">Go-Live Readiness</div>
+                <div className="what-tags">MS Project</div>
+                <div className="what-tags">Power Automate</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -128,22 +128,21 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>DESIGN</h3>
-              <h4>Description</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae
-              </p>
-              <h5>Skillset & tools</h5>
+              <h3>{t.whatIDo.bi.title}</h3>
+              <h4>{t.whatIDo.bi.subtitle}</h4>
+              <p>{t.whatIDo.bi.desc}</p>
+              <h5>{t.whatIDo.skillset}</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Blender</div>
-                <div className="what-tags">Zbrush</div>
-                <div className="what-tags">UI Design</div>
-                <div className="what-tags">Motion</div>
-                <div className="what-tags">Rigging</div>
-                <div className="what-tags">3D Animation</div>
-                <div className="what-tags">Character Design</div>
-                <div className="what-tags">Modelling</div>
+                <div className="what-tags">Power BI</div>
+                <div className="what-tags">DAX</div>
+                <div className="what-tags">Power Query</div>
+                <div className="what-tags">SQL</div>
+                <div className="what-tags">Python</div>
+                <div className="what-tags">ETL / ELT</div>
+                <div className="what-tags">Data Modeling</div>
+                <div className="what-tags">Variance Analysis</div>
+                <div className="what-tags">KPI Dashboards</div>
+                <div className="what-tags">AWS / Azure</div>
               </div>
               <div className="what-arrow"></div>
             </div>

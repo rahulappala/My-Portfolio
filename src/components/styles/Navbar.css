@@ -3,6 +3,7 @@
   max-width: var(--cMaxWidth);
   width: var(--cWidth);
   justify-content: space-between;
+  align-items: center;
   padding: 20px 0px;
   margin-bottom: -100px;
   box-sizing: border-box;
@@ -12,6 +13,59 @@
   top: 0;
   z-index: 9999;
 }
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.lang-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 5px 12px;
+  color: #94a3b8;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+  user-select: none;
+}
+
+.lang-toggle-btn:hover {
+  background: rgba(196, 129, 255, 0.14);
+  border-color: rgba(196, 129, 255, 0.45);
+  box-shadow: 0 0 16px rgba(196, 129, 255, 0.25);
+  color: #fff;
+}
+
+.lang-globe {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.lang-opt {
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  color: #8892b0;
+}
+
+.lang-opt.active {
+  color: #c481ff;
+  font-weight: 800;
+  text-shadow: 0 0 8px rgba(196, 129, 255, 0.6);
+}
+
+.lang-sep {
+  opacity: 0.35;
+  font-size: 10px;
+}
+
 .header ul {
   font-size: 12px;
   display: flex;
@@ -19,7 +73,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  column-gap: 40px;
+  column-gap: 28px;
   row-gap: 8px;
   align-items: end;
 }
@@ -31,19 +85,22 @@
   cursor: pointer;
 }
 .navbar-connect {
-  position: absolute;
   display: none;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 15px;
-  letter-spacing: 1px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
   font-weight: 500;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+.navbar-connect:hover {
+  color: #fff;
 }
 .navbar-title {
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.2px;
+  white-space: nowrap;
 }
 @media only screen and (min-width: 500px) {
   .header {
@@ -52,7 +109,7 @@
   .header ul {
     flex-direction: row;
     align-items: center;
-    font-size: 14px;
+    font-size: 13px;
   }
   .header ul li {
     color: #eae5ec;
@@ -61,21 +118,21 @@
     font-size: 16px;
   }
 }
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 1400px) {
   .navbar-connect {
     display: block;
   }
 }
 @media only screen and (min-width: 1200px) {
   .header {
-    padding: 35px 0px;
+    padding: 30px 0px;
   }
   .header ul {
-    column-gap: 80px;
-    font-size: 16px;
+    column-gap: 36px;
+    font-size: 15px;
   }
   .navbar-connect {
-    font-size: 16px;
+    font-size: 15px;
   }
   .navbar-title {
     font-size: 18px;

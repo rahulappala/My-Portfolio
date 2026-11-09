@@ -1,15 +1,18 @@
 import {
   FaGithub,
-  FaInstagram,
   FaLinkedinIn,
-  FaXTwitter,
+  FaXing,
+  FaPhone,
+  FaEnvelope,
 } from "react-icons/fa6";
 import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
 import { useEffect } from "react";
 import HoverLinks from "./HoverLinks";
+import { useLanguage } from "../context/LanguageContext";
 
 const SocialIcons = () => {
+  const { t } = useLanguage();
   useEffect(() => {
     const social = document.getElementById("social") as HTMLElement;
 
@@ -60,28 +63,33 @@ const SocialIcons = () => {
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
-          <a href="https://github.com" target="_blank">
+          <a href="https://github.com/rahulappala" target="_blank" rel="noreferrer" title="GitHub">
             <FaGithub />
           </a>
         </span>
         <span>
-          <a href="https://www.linkedin.com" target="_blank">
+          <a href="https://www.linkedin.com/in/rahul-appala" target="_blank" rel="noreferrer" title="LinkedIn">
             <FaLinkedinIn />
           </a>
         </span>
         <span>
-          <a href="https://x.com" target="_blank">
-            <FaXTwitter />
+          <a href="https://www.xing.com/profile/Rahul_Appala/" target="_blank" rel="noreferrer" title="Xing">
+            <FaXing />
           </a>
         </span>
         <span>
-          <a href="https://www.instagram.com" target="_blank">
-            <FaInstagram />
+          <a href="tel:+4917683342097" title="Call +4917683342097">
+            <FaPhone />
+          </a>
+        </span>
+        <span>
+          <a href="mailto:mail.rahulappala@gmail.com" title="Email">
+            <FaEnvelope />
           </a>
         </span>
       </div>
-      <a className="resume-button" href="#">
-        <HoverLinks text="RESUME" />
+      <a className="resume-button" href="/resume.pdf" target="_blank" rel="noreferrer">
+        <HoverLinks text={t.social.resume} />
         <span>
           <TbNotes />
         </span>

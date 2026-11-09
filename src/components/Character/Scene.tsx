@@ -44,6 +44,7 @@ const Scene = () => {
       camera.updateProjectionMatrix();
 
       let headBone: THREE.Object3D | null = null;
+      let neckBone: THREE.Object3D | null = null;
       let screenLight: any | null = null;
       let mixer: THREE.AnimationMixer;
 
@@ -62,6 +63,7 @@ const Scene = () => {
           setChar(character);
           scene.add(character);
           headBone = character.getObjectByName("spine006") || null;
+          neckBone = character.getObjectByName("spine005") || null;
           screenLight = character.getObjectByName("screenlight") || null;
           progress.loaded().then(() => {
             setTimeout(() => {
@@ -108,6 +110,10 @@ const Scene = () => {
       }
       const animate = () => {
         requestAnimationFrame(animate);
+        const delta = clock.getDelta();
+        if (mixer) {
+          mixer.update(delta);
+        }
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -115,13 +121,10 @@ const Scene = () => {
             mouse.y,
             interpolation.x,
             interpolation.y,
-            THREE.MathUtils.lerp
+            THREE.MathUtils.lerp,
+            neckBone
           );
           light.setPointLight(screenLight);
-        }
-        const delta = clock.getDelta();
-        if (mixer) {
-          mixer.update(delta);
         }
         renderer.render(scene, camera);
       };

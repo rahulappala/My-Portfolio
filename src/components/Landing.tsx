@@ -1,28 +1,30 @@
 import { PropsWithChildren } from "react";
+import { useLanguage } from "../context/LanguageContext";
 import "./styles/Landing.css";
 
 const Landing = ({ children }: PropsWithChildren) => {
+  const { t } = useLanguage();
+
   return (
     <>
       <div className="landing-section" id="landingDiv">
         <div className="landing-container">
           <div className="landing-intro">
-            <h2>Hello! I'm</h2>
+            <h2>{t.landing.hello}</h2>
             <h1>
-              MONCY
+              {t.landing.name}
               <br />
-              <span>YOHANNAN</span>
+              <span>{t.landing.surname}</span>
             </h1>
           </div>
           <div className="landing-info">
-            <h3>A Creative</h3>
-            <h2 className="landing-info-h2">
-              <div className="landing-h2-1">Designer</div>
-              <div className="landing-h2-2">Developer</div>
-            </h2>
-            <h2>
-              <div className="landing-h2-info">Developer</div>
-              <div className="landing-h2-info-1">Designer</div>
+            <h3>{t.landing.role}</h3>
+            <h2 className="landing-title-main">
+              {t.landing.title1}
+              <br />
+              {t.landing.title2}
+              <br />
+              <span>{t.landing.title3}</span>
             </h2>
           </div>
         </div>

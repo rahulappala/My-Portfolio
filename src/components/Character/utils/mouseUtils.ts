@@ -40,43 +40,37 @@ export const handleHeadRotation = (
   mouseY: number,
   interpolationX: number,
   interpolationY: number,
-  lerp: (x: number, y: number, t: number) => number
+  lerp: (x: number, y: number, t: number) => number,
+  neckBone?: THREE.Object3D | null
 ) => {
   if (!headBone) return;
   if (window.scrollY < 200) {
-    const maxRotation = Math.PI / 6;
+    // Unslouch neck into confident, natural posture
+    if (neckBone) {
+      neckBone.rotation.x = lerp(neckBone.rotation.x, 0.08, interpolationX);
+      neckBone.rotation.y = lerp(neckBone.rotation.y, mouseX * 0.15, interpolationY);
+    }
+
+    const maxRotation = Math.PI / 5;
+    // Turn head to follow mouse left/right
     headBone.rotation.y = lerp(
       headBone.rotation.y,
       mouseX * maxRotation,
       interpolationY
     );
-    let minRotationX = -0.3;
-    let maxRotationX = 0.4;
-    if (mouseY > minRotationX) {
-      if (mouseY < maxRotationX) {
-        headBone.rotation.x = lerp(
-          headBone.rotation.x,
-          -mouseY - 0.5 * maxRotation,
-          interpolationX
-        );
-      } else {
-        headBone.rotation.x = lerp(
-          headBone.rotation.x,
-          -maxRotation - 0.5 * maxRotation,
-          interpolationX
-        );
-      }
-    } else {
-      headBone.rotation.x = lerp(
-        headBone.rotation.x,
-        -minRotationX - 0.5 * maxRotation,
-        interpolationX
-      );
-    }
+    // Head pitch: held up proudly (+0.18) looking straight at visitor, nods up/down with cursor
+    const targetPitch = -mouseY * 0.35 + 0.18;
+    const clampedPitch = Math.max(-0.25, Math.min(0.40, targetPitch));
+    headBone.rotation.x = lerp(headBone.rotation.x, clampedPitch, interpolationX);
+    // Natural subtle roll
+    headBone.rotation.z = lerp(headBone.rotation.z, -mouseX * 0.08, interpolationY);
   } else {
     if (window.innerWidth > 1024) {
-      headBone.rotation.x = lerp(headBone.rotation.x, -0.4, 0.03);
-      headBone.rotation.y = lerp(headBone.rotation.y, -0.3, 0.03);
+      if (neckBone) {
+        neckBone.rotation.x = lerp(neckBone.rotation.x, 0.15, 0.03);
+      }
+      headBone.rotation.x = lerp(headBone.rotation.x, -0.05, 0.03);
+      headBone.rotation.y = lerp(headBone.rotation.y, -0.15, 0.03);
     }
   }
 };

@@ -3,71 +3,92 @@ import WorkImage from "./WorkImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useLanguage } from "../context/LanguageContext";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const projectImages = [
+  "/images/projects/project1_paas.webp",
+  "/images/projects/project2_powerbi.webp",
+  "/images/projects/project3_jira.webp",
+  "/images/projects/project4_confluence.webp",
+  "/images/projects/project5_sql.webp",
+  "/images/projects/project6_python.webp",
+];
 
 const Work = () => {
+  const { t } = useLanguage();
+
   useGSAP(() => {
-  let translateX: number = 0;
+    const mm = gsap.matchMedia();
 
-  function setTranslateX() {
-    const box = document.getElementsByClassName("work-box");
-    const rectLeft = document
-      .querySelector(".work-container")!
-      .getBoundingClientRect().left;
-    const rect = box[0].getBoundingClientRect();
-    const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-    let padding: number =
-      parseInt(window.getComputedStyle(box[0]).padding) / 2;
-    translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-  }
+    mm.add("(min-width: 1025px)", () => {
+      const workFlex = document.querySelector(".work-flex") as HTMLElement;
+      if (!workFlex) return;
 
-  setTranslateX();
+      const getScrollAmount = () => {
+        const boxes = workFlex.querySelectorAll<HTMLElement>(".work-box");
+        if (boxes.length === 0) return 0;
+        const lastBox = boxes[boxes.length - 1];
+        const totalContentWidth = lastBox.offsetLeft + lastBox.offsetWidth + 80;
+        return Math.max(0, totalContentWidth - window.innerWidth);
+      };
 
-  let timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".work-section",
-      start: "top top",
-      end: `+=${translateX}`, // Use actual scroll width
-      scrub: true,
-      pin: true,
-      id: "work",
-    },
-  });
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".work-section",
+          start: "top top",
+          end: () => `+=${getScrollAmount()}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          id: "work",
+        },
+      });
 
-  timeline.to(".work-flex", {
-    x: -translateX,
-    ease: "none",
-  });
+      timeline.to(".work-flex", {
+        x: () => -getScrollAmount(),
+        ease: "none",
+      });
 
-  // Clean up (optional, good practice)
-  return () => {
-    timeline.kill();
-    ScrollTrigger.getById("work")?.kill();
-  };
-}, []);
+      return () => {
+        timeline.kill();
+        ScrollTrigger.getById("work")?.kill();
+      };
+    });
+
+    ScrollTrigger.refresh();
+
+    return () => {
+      mm.revert();
+    };
+  }, []);
+
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
         <h2>
-          My <span>Work</span>
+          {t.work.title1} <span>{t.work.title2}</span>
         </h2>
         <div className="work-flex">
-          {[...Array(6)].map((_value, index) => (
+          {t.work.projects.map((project, index) => (
             <div className="work-box" key={index}>
               <div className="work-info">
                 <div className="work-title">
-                  <h3>0{index + 1}</h3>
-
+                  <h3>{project.number}</h3>
                   <div>
-                    <h4>Project Name</h4>
-                    <p>Category</p>
+                    <h4>{project.title}</h4>
+                    <p>{project.category}</p>
                   </div>
                 </div>
-                <h4>Tools and features</h4>
-                <p>Javascript, TypeScript, React, Threejs</p>
+                <h4>{t.work.toolsHeading}</h4>
+                <p>{project.tools}</p>
+                <p style={{ marginTop: "8px", fontSize: "14px", color: "#94a3b8", lineHeight: "1.4" }}>
+                  {project.desc}
+                </p>
               </div>
-              <WorkImage image="/images/placeholder.webp" alt="" />
+              <WorkImage image={projectImages[index] || projectImages[0]} alt={project.title} />
             </div>
           ))}
         </div>

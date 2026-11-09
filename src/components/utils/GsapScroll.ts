@@ -69,7 +69,8 @@ export function setCharTimeline(
         .fromTo(".character-model", { x: 0 }, { x: "-25%", duration: 1 }, 0)
         .to(".landing-container", { opacity: 0, duration: 0.4 }, 0)
         .to(".landing-container", { y: "40%", duration: 0.8 }, 0)
-        .fromTo(".about-me", { y: "-50%" }, { y: "0%" }, 0);
+        .fromTo(".about-me", { y: "-20%" }, { y: "0%" }, 0)
+        .fromTo(".about-section", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.15);
 
       tl2
         .to(
@@ -115,7 +116,6 @@ export function setCharTimeline(
           { y: "-100%", duration: 4, ease: "none", delay: 1 },
           0
         )
-        .fromTo(".whatIDO", { y: 0 }, { y: "15%", duration: 2 }, 0)
         .to(character.rotation, { x: -0.04, duration: 2, delay: 1 }, 0);
     }
   } else {
@@ -172,20 +172,4 @@ export function setAllTimeline() {
       },
       0
     );
-
-  if (window.innerWidth > 1024) {
-    careerTimeline.fromTo(
-      ".career-section",
-      { y: 0 },
-      { y: "20%", duration: 0.5, delay: 0.2 },
-      0
-    );
-  } else {
-    careerTimeline.fromTo(
-      ".career-section",
-      { y: 0 },
-      { y: 0, duration: 0.5, delay: 0.2 },
-      0
-    );
-  }
 }
