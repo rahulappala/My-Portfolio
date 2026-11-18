@@ -9,6 +9,7 @@ import SocialIcons from "./SocialIcons";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import TechStack from "./TechStack";
+import EngineeringLab from "./EngineeringLab";
 import setSplitText from "./utils/splitText";
 import { useLanguage } from "../context/LanguageContext";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -54,6 +55,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <Career />
             <Work />
             <TechStack />
+            <EngineeringLab />
             <Contact />
           </div>
         </div>

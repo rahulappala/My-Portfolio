@@ -80,6 +80,11 @@ const Navbar = () => {
               </a>
             </li>
             <li>
+              <a data-href="#lab" href="#lab">
+                <HoverLinks text={t.nav.lab} />
+              </a>
+            </li>
+            <li>
               <a data-href="#contact" href="#contact">
                 <HoverLinks text={t.nav.contact} />
               </a>

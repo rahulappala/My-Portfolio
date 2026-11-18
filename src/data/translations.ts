@@ -6,6 +6,7 @@ export interface Translations {
     career: string;
     work: string;
     skills: string;
+    lab: string;
     contact: string;
     toggleLabel: string;
     currentLang: string;
@@ -79,6 +80,27 @@ export interface Translations {
       tags: string[];
     }>;
   };
+  engineeringLab: {
+    title1: string;
+    title2: string;
+    subtitle: string;
+    tagline: string;
+    tracks: Array<{
+      categoryTitle: string;
+      categorySubtitle: string;
+      projects: Array<{
+        name: string;
+        tag: string;
+        desc: string;
+        takeawayLabel: string;
+        takeaway: string;
+        skills: string[];
+        liveUrl?: string;
+        liveUrlText?: string;
+        status?: string;
+      }>;
+    }>;
+  };
   contact: {
     title: string;
     subtitle: string;
@@ -102,6 +124,7 @@ export const translations: Record<Language, Translations> = {
       career: "CAREER",
       work: "WORK",
       skills: "SKILLS",
+      lab: "LAB",
       contact: "CONTACT",
       toggleLabel: "DE",
       currentLang: "EN",
@@ -276,6 +299,82 @@ export const translations: Record<Language, Translations> = {
         },
       ],
     },
+    engineeringLab: {
+      title1: "Engineering",
+      title2: "Lab",
+      subtitle: "Continuous Learning & Projects",
+      tagline: "Hands-on technical explorations, modern architectures, and projects built during self-driven learning beyond client consulting.",
+      tracks: [
+        {
+          categoryTitle: "Applied AI & Autonomous Agents",
+          categorySubtitle: "Vision-in-the-Loop Agents • Model Context Protocol (MCP) • Production LLM Inference",
+          projects: [
+            {
+              name: "HireMaster / Hirelens",
+              tag: "Production Full-Stack AI Platform",
+              desc: "Engineered and deployed an end-to-end recruitment audit platform featuring weighted CV-to-job matching, ATS compliance scoring, and contextual AI chat.",
+              takeawayLabel: "Key Exploration & Competencies:",
+              takeaway: "Implemented sub-second Groq LLM inference, strict Pydantic JSON schema validation, and containerized Docker CI/CD on Vercel with Supabase PostgreSQL.",
+              skills: ["FastAPI", "React 18", "Groq LLM API", "Supabase (PostgreSQL)", "Docker", "Vercel"],
+              liveUrl: "https://hirelens-alpha.vercel.app",
+              liveUrlText: "Live Demo",
+              status: "Live Deployed",
+            },
+            {
+              name: "Multimodal Vision Agent & LaTeX Engine",
+              tag: "Autonomous Web Agent & Document AST",
+              desc: "Built an autonomous vision-guided agent that perceives dynamic browser form semantics, correlates user profiles, and automates end-to-end portal submissions.",
+              takeawayLabel: "Key Exploration & Competencies:",
+              takeaway: "Engineered multimodal screen-perception loops using Gemini Vision and Playwright, paired with an automated LaTeX AST parser for on-the-fly tailored document generation.",
+              skills: ["Gemini Multimodal Vision", "Playwright Async", "Python", "LaTeX AST Engine", "Streamlit"],
+              status: "Completed Prototype",
+            },
+            {
+              name: "Dossier — Career Intelligence & MCP Workspace",
+              tag: "Local-First Desktop & Tool-Augmented AI",
+              desc: "Configured and extended a containerized local-first workspace featuring direct Anthropic Claude Model Context Protocol (MCP) server integration.",
+              takeawayLabel: "Key Exploration & Competencies:",
+              takeaway: "Architected custom MCP connectors exposing enterprise data to LLMs, implemented Prisma 7 / PostgreSQL 18 relational stores, and packaged for desktop via Electron.",
+              skills: ["Next.js 16", "Claude MCP", "PostgreSQL 18", "Prisma 7", "Docker", "Electron", "Vitest"],
+              status: "Completed System",
+            },
+          ],
+        },
+        {
+          categoryTitle: "Modern Data Engines & Systems",
+          categorySubtitle: "Vectorized In-Memory SQL (DuckDB) • Native Android • Low-Level Linux Kernel",
+          projects: [
+            {
+              name: "Hexeract (QRedSet)",
+              tag: "Vectorized BI & Analytics Studio",
+              desc: "Architected a local-first, microsecond-fast BI studio unifying multi-source data federation, a node-based ETL canvas, and an executive KPI storytelling studio.",
+              takeawayLabel: "Key Exploration & Competencies:",
+              takeaway: "Designed in-process vectorized SQL compute with DuckDB and zero-copy Apache Arrow buffers, a Single Source of Truth (SSOT) semantic layer, and an 84-suite automated Pytest harness.",
+              skills: ["DuckDB (Vectorized SQL)", "Apache Arrow", "Flask 3.x", "Celery Async", "Semantic Layer", "Pytest (84 Suites)"],
+              status: "In Active R&D",
+            },
+            {
+              name: "AdPoSa — Advanced Power Saver",
+              tag: "Native Android & OS Architecture",
+              desc: "Engineered a native Android launcher utilizing an ultra-minimalist, pure AMOLED #000000 interface that completely shuts off unused OLED subpixels.",
+              takeawayLabel: "Key Exploration & Competencies:",
+              takeaway: "Leveraged Android Architecture Components, Kotlin, Jetpack Compose, lightweight background battery broadcast receivers, and system RoleManager integration.",
+              skills: ["Android", "Kotlin", "Jetpack Compose", "RoleManager", "Foreground Services"],
+              status: "Completed App",
+            },
+            {
+              name: "OnePlus 3 Linux Edge Server",
+              tag: "Hardware Longevity & Kernel Tuning",
+              desc: "Repurposed legacy mobile hardware into an always-on 24/7 Linux edge server, extending hardware lifecycle and eliminating battery bloat risks.",
+              takeawayLabel: "Key Exploration & Competencies:",
+              takeaway: "Modified Qualcomm PM8996 power management registers (/sys/class/power_supply/battery/) to bypass battery charging and power the board directly via USB, with Magisk ADB automation.",
+              skills: ["Linux Kernel Registers", "Qualcomm PM8996 PMIC", "Magisk Root", "ADB Automation", "PowerShell"],
+              status: "Active Edge Server",
+            },
+          ],
+        },
+      ],
+    },
     contact: {
       title: "Get In Touch",
       subtitle: "Let's build scalable platforms and intelligent data architectures together.",
@@ -297,6 +396,7 @@ export const translations: Record<Language, Translations> = {
       career: "WERDEGANG",
       work: "PROJEKTE",
       skills: "KOMPETENZEN",
+      lab: "LAB",
       contact: "KONTAKT",
       toggleLabel: "EN",
       currentLang: "DE",
@@ -468,6 +568,82 @@ export const translations: Record<Language, Translations> = {
           subtitle: "Mathematische Modelle, Simulation & Problemlösung",
           desc: "Fundierte akademische Basis durch den M.Sc. in Computational Mechanics für mathematische Modellierung, algorithmische Datenanalyse und komplexe Simulationen.",
           tags: ["Numerische Mechanik", "Computational Mechanics", "Finite-Elemente-Methode", "Datensimulation", "Statistische Tests", "Algorithmenentwurf"],
+        },
+      ],
+    },
+    engineeringLab: {
+      title1: "Engineering",
+      title2: "Lab",
+      subtitle: "Kontinuierliche Weiterbildung & Eigenständige Projekte",
+      tagline: "Praktische technische Entwicklungen, moderne Architekturen und eigenständig vertiefte Technologien jenseits der Kundenberatung.",
+      tracks: [
+        {
+          categoryTitle: "Angewandte KI & Autonome Agenten",
+          categorySubtitle: "Bildverarbeitende Web-Agenten • Model Context Protocol (MCP) • Produktionsreife LLM-Inferenz",
+          projects: [
+            {
+              name: "HireMaster / Hirelens",
+              tag: "Full-Stack KI-Recruiting-Plattform",
+              desc: "Entwicklung und Live-Deployment einer Plattform zur CV-Job-Analyse mit gewichtetem Matching, ATS-Auditierung und kontextuellem KI-Chat.",
+              takeawayLabel: "Praxiserkenntnisse & Vertiefte Kompetenzen:",
+              takeaway: "Realisierung von Sub-Sekunden-Inferenz via Groq LLM API, strikter Pydantic-JSON-Schema-Validierung und containerisiertem Docker-Deployment auf Vercel mit Supabase PostgreSQL.",
+              skills: ["FastAPI", "React 18", "Groq LLM API", "Supabase (PostgreSQL)", "Docker", "Vercel"],
+              liveUrl: "https://hirelens-alpha.vercel.app",
+              liveUrlText: "Live-Demo",
+              status: "Live Bereitgestellt",
+            },
+            {
+              name: "Multimodaler Web-Agent & LaTeX-Pipeline",
+              tag: "Autonomer KI-Agent & Dokumenten-AST",
+              desc: "Entwicklung eines bildverarbeitenden Web-Agenten, der Eingabefelder in Online-Bewerbungsportalen visuell erfasst und mit Bewerberdaten synchronisiert.",
+              takeawayLabel: "Praxiserkenntnisse & Vertiefte Kompetenzen:",
+              takeaway: "Entwicklung multimodaler Screen-Perception-Schleifen mittels Gemini Vision und Playwright, gekoppelt mit einem automatisierten LaTeX-AST-Compiler zur On-the-Fly-Dokumentengenerierung.",
+              skills: ["Gemini Multimodal Vision", "Playwright Async", "Python", "LaTeX AST Engine", "Streamlit"],
+              status: "Funktionsfähiger Prototyp",
+            },
+            {
+              name: "Dossier — Career Intelligence & MCP-Workspace",
+              tag: "Lokaler Desktop & Tool-Augmented AI",
+              desc: "Bereitstellung und Erweiterung einer containerisierten Plattform mit direkter Anbindung an das Anthropic Claude Model Context Protocol (MCP).",
+              takeawayLabel: "Praxiserkenntnisse & Vertiefte Kompetenzen:",
+              takeaway: "Konzeption benutzerdefinierter MCP-Server zur Bereitstellung strukturierter Daten an LLMs, relationale Datenhaltung via Prisma 7 / PostgreSQL 18 und Electron-Desktop-Packaging.",
+              skills: ["Next.js 16", "Claude MCP", "PostgreSQL 18", "Prisma 7", "Docker", "Electron", "Vitest"],
+              status: "Fertiggestelltes System",
+            },
+          ],
+        },
+        {
+          categoryTitle: "Hochperformante Daten-Engines & Systeme",
+          categorySubtitle: "Vektorisierte In-Memory-SQL (DuckDB) • Nativer Android-Code • Linux-Kernel-Tuning",
+          projects: [
+            {
+              name: "Hexeract (QRedSet)",
+              tag: "Vektorisierte BI- & Analytics-Plattform",
+              desc: "Konzeption eines lokalen, mikrosekundenschnellen BI-Studios mit Multi-Source-Datenföderation, visuellem ETL-Canvas und semantischem SSOT-Layer.",
+              takeawayLabel: "Praxiserkenntnisse & Vertiefte Kompetenzen:",
+              takeaway: "In-Process-vektorisierte SQL-Berechnung mit DuckDB und Zero-Copy Apache Arrow Buffern, SSOT-Metrikdefinition und Testabdeckung mit 84 Pytest-Suiten.",
+              skills: ["DuckDB (Vektorisiert)", "Apache Arrow", "Flask 3.x", "Celery Async", "Semantic Layer", "Pytest (84 Suiten)"],
+              status: "In Aktiver R&D",
+            },
+            {
+              name: "AdPoSa — Advanced Power Saver",
+              tag: "Native App-Entwicklung & Android-Architektur",
+              desc: "Entwicklung eines minimalistischen Android-Launchers mit reinem AMOLED #000000 Design zur vollständigen Abschaltung ungenutzter OLED-Subpixel.",
+              takeawayLabel: "Praxiserkenntnisse & Vertiefte Kompetenzen:",
+              takeaway: "Nutzung von Android Architecture Components, Kotlin, Jetpack Compose, ressourcenschonenden Broadcast-Receivern und nativer RoleManager-Integration.",
+              skills: ["Android", "Kotlin", "Jetpack Compose", "RoleManager", "Foreground Services"],
+              status: "Fertige App",
+            },
+            {
+              name: "OnePlus 3 Linux Edge-Server",
+              tag: "Hardware-Nachhaltigkeit & Kernel-Tuning",
+              desc: "Umnutzung ausgedienter Smartphone-Hardware in einen lautlosen 24/7 Linux-Edge-Server zur Verlängerung des Hardware-Lebenszyklus ohne Akku-Aufblähungsrisiko.",
+              takeawayLabel: "Praxiserkenntnisse & Vertiefte Kompetenzen:",
+              takeaway: "Hardwarenahe Modifikation der Qualcomm PM8996 Ladesteuerungsregister (/sys/class/power_supply/battery/) zur direkten USB-Stromversorgung ohne Akkubelastung via Magisk und ADB.",
+              skills: ["Linux Kernel Register", "Qualcomm PM8996 PMIC", "Magisk Root", "ADB Automation", "PowerShell"],
+              status: "Aktiver Edge-Server",
+            },
+          ],
         },
       ],
     },
