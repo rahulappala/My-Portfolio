@@ -135,6 +135,16 @@ export interface Translations {
   social: {
     resume: string;
   };
+  cvDownload: {
+    title: string;
+    subtitle: string;
+    englishCv: string;
+    englishSub: string;
+    germanCv: string;
+    germanSub: string;
+    close: string;
+    contactDownloadLabel: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -429,6 +439,16 @@ export const translations: Record<Language, Translations> = {
     social: {
       resume: "RESUME",
     },
+    cvDownload: {
+      title: "Download Resume / CV",
+      subtitle: "Choose your preferred language version",
+      englishCv: "English CV (PDF)",
+      englishSub: "Original English Version",
+      germanCv: "Deutscher Lebenslauf (PDF)",
+      germanSub: "Deutsche Fassung (DIN 5008)",
+      close: "Close",
+      contactDownloadLabel: "Download CV",
+    },
   },
   de: {
     nav: {
@@ -720,6 +740,16 @@ export const translations: Record<Language, Translations> = {
     },
     social: {
       resume: "LEBENSLAUF",
+    },
+    cvDownload: {
+      title: "Lebenslauf Herunterladen",
+      subtitle: "Wählen Sie die gewünschte Sprachversion",
+      englishCv: "Englischer CV (PDF)",
+      englishSub: "Original English Version",
+      germanCv: "Deutscher Lebenslauf (PDF)",
+      germanSub: "Deutsche Fassung (DIN 5008)",
+      close: "Schließen",
+      contactDownloadLabel: "Lebenslauf Herunterladen",
     },
   },
 };

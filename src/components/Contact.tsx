@@ -81,6 +81,33 @@ const Contact = () => {
               <strong>{lang === "de" ? "Sprachen:" : "Languages:"}</strong>{" "}
               {lang === "de" ? "Deutsch (C1) • Englisch (C1)" : "German (C1) • English (C1)"}
             </div>
+            <div style={{ marginTop: "18px", paddingTop: "14px", borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+              <div style={{ fontSize: "12px", textTransform: "uppercase", letterSpacing: "1px", color: "#94a3b8", marginBottom: "8px", fontWeight: 600 }}>
+                {t.cvDownload.contactDownloadLabel}
+              </div>
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                <a
+                  href="/CV_Rahul_Appala_EN.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cursor="disable"
+                  className="contact-social"
+                  style={{ fontSize: "13px", padding: "6px 12px", background: "rgba(255, 255, 255, 0.04)", borderRadius: "8px", border: "1px solid rgba(255, 255, 255, 0.1)" }}
+                >
+                  🇬🇧 English CV <MdArrowOutward />
+                </a>
+                <a
+                  href="/Lebenslauf_Rahul_Appala_DE.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cursor="disable"
+                  className="contact-social"
+                  style={{ fontSize: "13px", padding: "6px 12px", background: "rgba(167, 139, 250, 0.08)", borderRadius: "8px", border: "1px solid rgba(167, 139, 250, 0.25)", color: "#c4b5fd" }}
+                >
+                  🇩🇪 Deutscher Lebenslauf <MdArrowOutward />
+                </a>
+              </div>
+            </div>
           </div>
           <div className="contact-box">
             <h2>

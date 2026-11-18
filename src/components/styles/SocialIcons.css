@@ -61,6 +61,10 @@
   transition: 0.5s;
   transform-origin: left bottom;
   transform: translateX(100%) rotateZ(-90deg);
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
 }
 .resume-button:hover {
   color: #fff;
@@ -100,4 +104,186 @@ div.resume-button span {
     font-size: 23px;
     margin-top: -1.5px;
   }
+}
+
+/* Resume / CV Modal */
+.cv-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 18, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: cvFadeIn 0.2s ease-out;
+}
+
+@keyframes cvFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cv-modal-box {
+  background: #0b1120;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 480px;
+  padding: 30px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(56, 189, 248, 0.12);
+  position: relative;
+  animation: cvScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@keyframes cvScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.cv-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.cv-modal-header-text h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.3px;
+}
+
+.cv-modal-header-text p {
+  margin: 6px 0 0 0;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.cv-modal-close-icon {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cv-modal-close-icon:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.cv-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.cv-option-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cv-option-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+}
+
+.cv-option-card.de-version:hover {
+  border-color: #a78bfa;
+  box-shadow: 0 10px 25px rgba(167, 139, 250, 0.15);
+}
+
+.cv-option-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cv-option-flag {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.cv-option-text h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.cv-option-text p {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.cv-option-arrow {
+  font-size: 18px;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.cv-option-card:hover .cv-option-arrow {
+  color: #38bdf8;
+  transform: translate(2px, -2px);
+}
+
+.cv-option-card.de-version:hover .cv-option-arrow {
+  color: #a78bfa;
+}
+
+.cv-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cv-modal-cancel-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cv-modal-cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
 }

@@ -5,14 +5,27 @@ import {
   FaPhone,
   FaEnvelope,
 } from "react-icons/fa6";
+import { MdArrowOutward, MdClose } from "react-icons/md";
 import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import HoverLinks from "./HoverLinks";
 import { useLanguage } from "../context/LanguageContext";
 
 const SocialIcons = () => {
   const { t } = useLanguage();
+  const [isCvModalOpen, setIsCvModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsCvModalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   useEffect(() => {
     const social = document.getElementById("social") as HTMLElement;
 
@@ -88,12 +101,93 @@ const SocialIcons = () => {
           </a>
         </span>
       </div>
-      <a className="resume-button" href="/resume.pdf" target="_blank" rel="noreferrer">
+      <button
+        type="button"
+        className="resume-button"
+        onClick={() => setIsCvModalOpen(true)}
+        aria-label="Download CV / Lebenslauf"
+        data-cursor="pointer"
+      >
         <HoverLinks text={t.social.resume} />
         <span>
           <TbNotes />
         </span>
-      </a>
+      </button>
+
+      {isCvModalOpen && (
+        <div
+          className="cv-modal-backdrop"
+          onClick={() => setIsCvModalOpen(false)}
+        >
+          <div
+            className="cv-modal-box"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="cv-modal-header">
+              <div className="cv-modal-header-text">
+                <h3>{t.cvDownload.title}</h3>
+                <p>{t.cvDownload.subtitle}</p>
+              </div>
+              <button
+                type="button"
+                className="cv-modal-close-icon"
+                onClick={() => setIsCvModalOpen(false)}
+                aria-label={t.cvDownload.close}
+              >
+                <MdClose />
+              </button>
+            </div>
+
+            <div className="cv-options-list">
+              <a
+                href="/CV_Rahul_Appala_EN.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cv-option-card"
+                onClick={() => setIsCvModalOpen(false)}
+              >
+                <div className="cv-option-content">
+                  <span className="cv-option-flag">🇬🇧</span>
+                  <div className="cv-option-text">
+                    <h4>{t.cvDownload.englishCv}</h4>
+                    <p>{t.cvDownload.englishSub}</p>
+                  </div>
+                </div>
+                <MdArrowOutward className="cv-option-arrow" />
+              </a>
+
+              <a
+                href="/Lebenslauf_Rahul_Appala_DE.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cv-option-card de-version"
+                onClick={() => setIsCvModalOpen(false)}
+              >
+                <div className="cv-option-content">
+                  <span className="cv-option-flag">🇩🇪</span>
+                  <div className="cv-option-text">
+                    <h4>{t.cvDownload.germanCv}</h4>
+                    <p>{t.cvDownload.germanSub}</p>
+                  </div>
+                </div>
+                <MdArrowOutward className="cv-option-arrow" />
+              </a>
+            </div>
+
+            <div className="cv-modal-footer">
+              <button
+                type="button"
+                className="cv-modal-cancel-btn"
+                onClick={() => setIsCvModalOpen(false)}
+              >
+                {t.cvDownload.close}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
