@@ -7,6 +7,7 @@ export interface Translations {
     work: string;
     skills: string;
     lab: string;
+    certs: string;
     contact: string;
     toggleLabel: string;
     currentLang: string;
@@ -101,6 +102,25 @@ export interface Translations {
       }>;
     }>;
   };
+  certifications: {
+    title1: string;
+    title2: string;
+    subtitle: string;
+    tagline: string;
+    filterAll: string;
+    filterAi: string;
+    filterData: string;
+    filterCloud: string;
+    filterAgile: string;
+    verifyButton: string;
+    issuedLabel: string;
+    licenseLabel: string;
+    showMore: string;
+    showLess: string;
+    showing: string;
+    of: string;
+    credentials: string;
+  };
   contact: {
     title: string;
     subtitle: string;
@@ -125,6 +145,7 @@ export const translations: Record<Language, Translations> = {
       work: "WORK",
       skills: "SKILLS",
       lab: "LAB",
+      certs: "CERTS",
       contact: "CONTACT",
       toggleLabel: "DE",
       currentLang: "EN",
@@ -375,6 +396,25 @@ export const translations: Record<Language, Translations> = {
         },
       ],
     },
+    certifications: {
+      title1: "VERIFIED",
+      title2: "CREDENTIALS & LICENSES",
+      subtitle: "A comprehensive record of 36 industry certifications spanning AI & Generative AI, Cloud Infrastructure, Data Engineering, and Agile Methodologies.",
+      tagline: "CONTINUOUS UPSKILLING & PROFESSIONAL EXCELLENCE",
+      filterAll: "All",
+      filterAi: "AI & Machine Learning",
+      filterData: "Data Science & Analytics",
+      filterCloud: "Cloud & Infrastructure",
+      filterAgile: "Agile & Business Analysis",
+      verifyButton: "Verify Credential",
+      issuedLabel: "Issued",
+      licenseLabel: "Credential ID",
+      showMore: "Show All 36 Certifications",
+      showLess: "Show Less",
+      showing: "Showing",
+      of: "of",
+      credentials: "verified credentials",
+    },
     contact: {
       title: "Get In Touch",
       subtitle: "Let's build scalable platforms and intelligent data architectures together.",
@@ -397,6 +437,7 @@ export const translations: Record<Language, Translations> = {
       work: "PROJEKTE",
       skills: "KOMPETENZEN",
       lab: "LAB",
+      certs: "ZERTIFIKATE",
       contact: "KONTAKT",
       toggleLabel: "EN",
       currentLang: "DE",
@@ -646,6 +687,25 @@ export const translations: Record<Language, Translations> = {
           ],
         },
       ],
+    },
+    certifications: {
+      title1: "VERIFIZIERTE",
+      title2: "ZERTIFIKATE & LIZENZEN",
+      subtitle: "Ein lückenloser Nachweis über 36 Branchenzertifizierungen in den Bereichen KI & Generative AI, Cloud-Infrastruktur, Data Engineering und agile Methoden.",
+      tagline: "KONTINUIERLICHE WEITERBILDUNG & FACHLICHE EXZELLENZ",
+      filterAll: "Alle",
+      filterAi: "KI & Maschinelles Lernen",
+      filterData: "Data Science & Analytik",
+      filterCloud: "Cloud & Infrastruktur",
+      filterAgile: "Agil & Business-Analyse",
+      verifyButton: "Zertifikat Prüfen",
+      issuedLabel: "Ausgestellt",
+      licenseLabel: "Lizenz-ID",
+      showMore: "Alle 36 Zertifikate Anzeigen",
+      showLess: "Weniger Anzeigen",
+      showing: "Zeige",
+      of: "von",
+      credentials: "verifizierten Zertifikaten",
     },
     contact: {
       title: "Kontakt Aufnehmen",

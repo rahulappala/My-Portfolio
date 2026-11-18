@@ -85,6 +85,11 @@ const Navbar = () => {
               </a>
             </li>
             <li>
+              <a data-href="#certifications" href="#certifications">
+                <HoverLinks text={t.nav.certs} />
+              </a>
+            </li>
+            <li>
               <a data-href="#contact" href="#contact">
                 <HoverLinks text={t.nav.contact} />
               </a>

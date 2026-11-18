@@ -1,0 +1,330 @@
+.certs-section {
+  position: relative;
+  width: var(--cWidth);
+  max-width: 1400px;
+  margin: 100px auto 140px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.certs-header {
+  margin-bottom: 40px;
+}
+
+.certs-header h2 {
+  font-size: calc(3vw + 24px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.certs-header h2 span {
+  color: var(--accentColor);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.certs-subtitle {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #a78bfa;
+  margin-top: 12px;
+  background: rgba(167, 139, 250, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  padding: 4px 14px;
+  border-radius: 30px;
+}
+
+.certs-tagline {
+  font-size: 16px;
+  color: #94a3b8;
+  max-width: 820px;
+  margin-top: 14px;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Controls & Filter Tabs */
+.certs-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.certs-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cert-tab-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cert-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.cert-tab-btn.active {
+  background: rgba(167, 139, 250, 0.15);
+  color: #e2e8f0;
+  border-color: #a78bfa;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.25);
+}
+
+.cert-tab-count {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 12px;
+}
+
+.cert-tab-btn.active .cert-tab-count {
+  background: #a78bfa;
+  color: #0f172a;
+}
+
+.certs-count-summary {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 400;
+}
+
+/* Certifications Grid */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Certification Card */
+.cert-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.cert-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cert-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(167, 139, 250, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.cert-card:hover::before {
+  opacity: 1;
+}
+
+.cert-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.cert-authority-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid;
+}
+
+/* Authority color variations */
+.auth-microsoft {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.auth-aws {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.auth-google {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.1);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.auth-datacamp {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+.auth-linkedin {
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.1);
+  border-color: rgba(2, 132, 199, 0.3);
+}
+
+.auth-apssdc {
+  color: #c084fc;
+  background: rgba(192, 132, 252, 0.1);
+  border-color: rgba(192, 132, 252, 0.3);
+}
+
+.auth-default {
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+.cert-date {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.cert-card-body {
+  flex: 1;
+  margin-bottom: 18px;
+}
+
+.cert-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f1f5f9;
+  line-height: 1.4;
+  margin: 0 0 10px 0;
+}
+
+.cert-license {
+  font-size: 12px;
+  color: #64748b;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.cert-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cert-verify-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #a78bfa;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cert-verify-link:hover {
+  color: #c4b5fd;
+  transform: translateX(2px);
+}
+
+.cert-verify-icon {
+  font-size: 15px;
+  transition: transform 0.2s ease;
+}
+
+.cert-verify-link:hover .cert-verify-icon {
+  transform: translate(2px, -2px);
+}
+
+/* Show All / Show Less Toggle */
+.certs-expand-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.certs-expand-btn {
+  background: rgba(167, 139, 250, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: #e2e8f0;
+  padding: 12px 28px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.certs-expand-btn:hover {
+  background: rgba(167, 139, 250, 0.2);
+  border-color: #a78bfa;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(167, 139, 250, 0.2);
+  transform: translateY(-2px);
+}
+
+.certs-expand-btn svg {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .certs-section {
+    margin: 80px auto 100px auto;
+  }
+
+  .certs-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .certs-grid {
+    grid-template-columns: 1fr;
+  }
+}
