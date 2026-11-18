@@ -9,6 +9,7 @@ import { MdArrowOutward, MdClose } from "react-icons/md";
 import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import HoverLinks from "./HoverLinks";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -25,6 +26,17 @@ const SocialIcons = () => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  useEffect(() => {
+    if (isCvModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isCvModalOpen]);
 
   useEffect(() => {
     const social = document.getElementById("social") as HTMLElement;
@@ -114,80 +126,82 @@ const SocialIcons = () => {
         </span>
       </button>
 
-      {isCvModalOpen && (
-        <div
-          className="cv-modal-backdrop"
-          onClick={() => setIsCvModalOpen(false)}
-        >
+      {isCvModalOpen &&
+        createPortal(
           <div
-            className="cv-modal-box"
-            onClick={(e) => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
+            className="cv-modal-backdrop"
+            onClick={() => setIsCvModalOpen(false)}
           >
-            <div className="cv-modal-header">
-              <div className="cv-modal-header-text">
-                <h3>{t.cvDownload.title}</h3>
-                <p>{t.cvDownload.subtitle}</p>
+            <div
+              className="cv-modal-box"
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+            >
+              <div className="cv-modal-header">
+                <div className="cv-modal-header-text">
+                  <h3>{t.cvDownload.title}</h3>
+                  <p>{t.cvDownload.subtitle}</p>
+                </div>
+                <button
+                  type="button"
+                  className="cv-modal-close-icon"
+                  onClick={() => setIsCvModalOpen(false)}
+                  aria-label={t.cvDownload.close}
+                >
+                  <MdClose />
+                </button>
               </div>
-              <button
-                type="button"
-                className="cv-modal-close-icon"
-                onClick={() => setIsCvModalOpen(false)}
-                aria-label={t.cvDownload.close}
-              >
-                <MdClose />
-              </button>
-            </div>
 
-            <div className="cv-options-list">
-              <a
-                href="/CV_Rahul_Appala_EN.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cv-option-card"
-                onClick={() => setIsCvModalOpen(false)}
-              >
-                <div className="cv-option-content">
-                  <span className="cv-option-flag">🇬🇧</span>
-                  <div className="cv-option-text">
-                    <h4>{t.cvDownload.englishCv}</h4>
-                    <p>{t.cvDownload.englishSub}</p>
+              <div className="cv-options-list">
+                <a
+                  href="/CV_Rahul_Appala_EN.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cv-option-card"
+                  onClick={() => setIsCvModalOpen(false)}
+                >
+                  <div className="cv-option-content">
+                    <span className="cv-option-flag">🇬🇧</span>
+                    <div className="cv-option-text">
+                      <h4>{t.cvDownload.englishCv}</h4>
+                      <p>{t.cvDownload.englishSub}</p>
+                    </div>
                   </div>
-                </div>
-                <MdArrowOutward className="cv-option-arrow" />
-              </a>
+                  <MdArrowOutward className="cv-option-arrow" />
+                </a>
 
-              <a
-                href="/Lebenslauf_Rahul_Appala_DE.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cv-option-card de-version"
-                onClick={() => setIsCvModalOpen(false)}
-              >
-                <div className="cv-option-content">
-                  <span className="cv-option-flag">🇩🇪</span>
-                  <div className="cv-option-text">
-                    <h4>{t.cvDownload.germanCv}</h4>
-                    <p>{t.cvDownload.germanSub}</p>
+                <a
+                  href="/Lebenslauf_Rahul_Appala_DE.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cv-option-card de-version"
+                  onClick={() => setIsCvModalOpen(false)}
+                >
+                  <div className="cv-option-content">
+                    <span className="cv-option-flag">🇩🇪</span>
+                    <div className="cv-option-text">
+                      <h4>{t.cvDownload.germanCv}</h4>
+                      <p>{t.cvDownload.germanSub}</p>
+                    </div>
                   </div>
-                </div>
-                <MdArrowOutward className="cv-option-arrow" />
-              </a>
-            </div>
+                  <MdArrowOutward className="cv-option-arrow" />
+                </a>
+              </div>
 
-            <div className="cv-modal-footer">
-              <button
-                type="button"
-                className="cv-modal-cancel-btn"
-                onClick={() => setIsCvModalOpen(false)}
-              >
-                {t.cvDownload.close}
-              </button>
+              <div className="cv-modal-footer">
+                <button
+                  type="button"
+                  className="cv-modal-cancel-btn"
+                  onClick={() => setIsCvModalOpen(false)}
+                >
+                  {t.cvDownload.close}
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 };
