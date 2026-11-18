@@ -10,6 +10,8 @@ import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { ScrollSmoother } from "../plugins/ScrollSmoother";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -28,13 +30,16 @@ const SocialIcons = () => {
   }, []);
 
   useEffect(() => {
+    const sm = ScrollSmoother.get();
     if (isCvModalOpen) {
-      document.body.style.overflow = "hidden";
+      sm?.paused(true);
     } else {
-      document.body.style.overflow = "";
+      sm?.paused(false);
+      ScrollTrigger.refresh();
     }
     return () => {
-      document.body.style.overflow = "";
+      ScrollSmoother.get()?.paused(false);
+      ScrollTrigger.refresh();
     };
   }, [isCvModalOpen]);
 
